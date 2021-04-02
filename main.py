@@ -1,16 +1,28 @@
+import math;
 class Fraction:
 
   #the constructor for the Fraction class
   #n is the numerator
   #d is the denominator
   #The constructor should create a Fraction object that is reduced
-	def __init__(self, num, den):
-		self.num = num
-		self.den = den
+  def __init__(self, num, den):
+    gcd = math.dc(num,den)
+    #if gdc == 1 these lines do nothing
+    num = num / gcd
+    den = den / gcd
+    if den < 0 and num >= 0:
+      den = -1 * den
+      num = -1 * num
+    if den < 0 and num < 0:
+      den = -1 * den
+      num = -1 * num
+    self.num = num
+    self.den = den
+    
 
   #Returns a string representation of self. This is needed to print Fractions in a list correctly. 
-	def __repr__(self):
-		return str(self.num) + "/" + str(self.den)
+  def __repr__(self):
+    return str(self.num) + "/" + str(self.den)
 		
   #If f and g are Fractions, then f * g returns a Fraction that is the
   # sum of f and g
