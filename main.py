@@ -1,12 +1,11 @@
 import math;
 class Fraction:
-
   #the constructor for the Fraction class
   #n is the numerator
   #d is the denominator
   #The constructor should create a Fraction object that is reduced
   def __init__(self, num, den):
-    gcd = math.dc(num,den)
+    gcd = math.gcd(num,den)
     #if gdc == 1 these lines do nothing
     num = num / gcd
     den = den / gcd
