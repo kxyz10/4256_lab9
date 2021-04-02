@@ -35,24 +35,40 @@ class Fraction:
     temp = self.num
     self.num = self.den
     self.den = temp
-    pass
 
   #If f is a Fractions, then -f returns a Fraction that is the
   # negation of f. 
   def __neg__(self):
-    pass
+    self.num = -1 * self.num
 
   #If f and g are Fractions, then f + g returns a Fraction that is the
   # sum of f and g
   def __add__(self, other):
-    pass
+    if self.den == other.den:
+      return Fraction(int(self.num + other.num), int(self.den))
+    else:
+      prod = self.den * other.den
+      selfNum = self.num * other.den
+      otherNum = other.num * self.den
+      return Fraction(int(selfNum + otherNum), int(prod))
+
 
 
   #If f and g are Fractions, then f - g returns a Fraction that is the
   # difference of f and g
   #You should implement this method without calling the constructor directly.
   def __sub__(self, other):
-    pass
+    if self.den != other.den:
+      self.num = self.num * other.den
+      other.num = other.num * self.den
+      self.den = self.den * other.den
+      other.den = other.den * self.den
+    if self.num >= other.num:
+      self.num = self.num - other.num
+    else:
+      self.num = 0 - (other.num - self.num)
+    return self
+      
 
   #If f and g are Fractions, then f / g returns a Fraction that is the
   # quotient of f and g
