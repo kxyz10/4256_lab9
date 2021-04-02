@@ -32,6 +32,9 @@ class Fraction:
   #If f is a Fractions, then ~f returns a Fraction that is the
   #reciprocal of f
   def __invert__(self):
+    temp = self.num
+    self.num = self.den
+    self.den = temp
     pass
 
   #If f is a Fractions, then -f returns a Fraction that is the
