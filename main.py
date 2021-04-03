@@ -4,8 +4,17 @@ class Fraction:
   #n is the numerator
   #d is the denominator
   #The constructor should create a Fraction object that is reduced
-  def __init__(self, num, den):
-    gcd = math.gcd(num,den)
+  def __init__(self, num, den = None):
+    if den == None:
+      slashLoc = num.find('/')
+      numerator = float(num[0:slashLoc])
+      denominator = float(num[slashLoc+1:len(num)])
+      num = numerator
+      den = denominator
+    if type(num) != float or type(den) != float:
+      gcd = math.gcd(num,den)
+    else:
+      gcd = 1
     #if gdc == 1 these lines do nothing
     num = num / gcd
     den = den / gcd
@@ -74,19 +83,28 @@ class Fraction:
   # quotient of f and g
   #You should implement this method without calling the constructor directly.
   def __truediv__(self, other):
-    pass
+    self.num = self.num * other.den
+    self.den = self.den * other.num
+    return self
 
   #Returns true if self < other. False otherwise
   def __lt__(self, other):
-    pass
+    return self.num/self.den < other.num/other.den
 
   #Returns the absolute value of self. If f is a Fraction, this is called as abs(f).
   def __abs__(self):
-    pass
+    if self.num < 0:
+      self.num = self.num * -1
+    return self
 
   ##Returns a string representation of self as a mixed number. For example, 12/5 as a mixed number is "2 2/5".
   def mixed_number(self):
-    pass
+    if self.num > self.den:
+      number = int(self.num / self.den)
+      remainder = self.num % self.den
+      return "{} {}/{}".format(number, remainder, self.den)
+    else:
+      return "{}/{}".format(self.num,self.den)
 
 #After you finish and test all of the methods above, you should modify the __init__ methods so that it can be passed a string
 #representation of a fraction, such as "14/102". To do this, modify the definition of __init__ as shown below,
